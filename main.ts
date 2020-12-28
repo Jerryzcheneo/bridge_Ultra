@@ -8,6 +8,8 @@ bluetooth.onBluetoothDisconnected(function () {
     basic.showIcon(IconNames.No)
     basic.pause(200)
 })
+let temp4 = 0
+let temp3 = 0
 let temp2 = 0
 let temp = 0
 let start_sending = 0
@@ -21,10 +23,6 @@ basic.forever(function () {
     DigitalPin.P10,
     DigitalPin.P11,
     PingUnit.Centimeters
-    ) > 0 && sonar.ping(
-    DigitalPin.P10,
-    DigitalPin.P11,
-    PingUnit.Centimeters
     ) < 16) {
         temp = sonar.ping(
         DigitalPin.P10,
@@ -32,19 +30,16 @@ basic.forever(function () {
         PingUnit.Centimeters
         )
         basic.pause(150)
-        if (sonar.ping(
+        temp2 = sonar.ping(
         DigitalPin.P10,
         DigitalPin.P11,
         PingUnit.Centimeters
-        ) - temp < 0) {
+        )
+        if (temp2 - temp < 0) {
             no_of_person += 1
             break;
         } else {
-            if (sonar.ping(
-            DigitalPin.P10,
-            DigitalPin.P11,
-            PingUnit.Centimeters
-            ) - temp > 0) {
+            if (temp2 - temp > 0) {
                 no_of_person += -1
                 break;
             }
@@ -66,30 +61,23 @@ basic.forever(function () {
     DigitalPin.P9,
     DigitalPin.P8,
     PingUnit.Centimeters
-    ) > 0 && sonar.ping(
-    DigitalPin.P9,
-    DigitalPin.P8,
-    PingUnit.Centimeters
     ) < 16) {
-        temp2 = sonar.ping(
+        temp3 = sonar.ping(
         DigitalPin.P9,
         DigitalPin.P8,
         PingUnit.Centimeters
         )
         basic.pause(150)
-        if (sonar.ping(
+        temp4 = sonar.ping(
         DigitalPin.P9,
         DigitalPin.P8,
         PingUnit.Centimeters
-        ) - temp2 < 0) {
+        )
+        if (temp4 - temp3 < 0) {
             no_of_person += 1
             break;
         } else {
-            if (sonar.ping(
-            DigitalPin.P9,
-            DigitalPin.P8,
-            PingUnit.Centimeters
-            ) - temp2 > 0) {
+            if (temp4 - temp3 > 0) {
                 no_of_person += -1
                 break;
             }
