@@ -1,6 +1,21 @@
+bluetooth.onBluetoothConnected(function () {
+    start_sending = 1
+    basic.showIcon(IconNames.Yes)
+    basic.pause(200)
+})
+bluetooth.onBluetoothDisconnected(function () {
+    start_sending = 0
+    basic.showIcon(IconNames.No)
+    basic.pause(200)
+})
 let temp2 = 0
 let temp = 0
+let start_sending = 0
+basic.showString("S")
+basic.pause(200)
+bluetooth.startUartService()
 let no_of_person = 0
+start_sending = 0
 basic.forever(function () {
     while (sonar.ping(
     DigitalPin.P10,
@@ -40,6 +55,9 @@ basic.forever(function () {
     }
     if (no_of_person > 9) {
         no_of_person = 9
+    }
+    if (start_sending == 1) {
+        bluetooth.uartWriteNumber(no_of_person)
     }
     basic.showNumber(no_of_person)
 })
@@ -82,6 +100,9 @@ basic.forever(function () {
     }
     if (no_of_person > 9) {
         no_of_person = 9
+    }
+    if (start_sending == 1) {
+        bluetooth.uartWriteNumber(no_of_person)
     }
     basic.showNumber(no_of_person)
 })
