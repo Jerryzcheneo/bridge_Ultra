@@ -31,12 +31,12 @@ basic.forever(function () {
         DigitalPin.P11,
         PingUnit.Centimeters
         )
-        basic.pause(200)
+        basic.pause(150)
         if (sonar.ping(
         DigitalPin.P10,
         DigitalPin.P11,
         PingUnit.Centimeters
-        ) - temp < 2) {
+        ) - temp < 0) {
             no_of_person += 1
             break;
         } else {
@@ -44,7 +44,7 @@ basic.forever(function () {
             DigitalPin.P10,
             DigitalPin.P11,
             PingUnit.Centimeters
-            ) - temp > 2) {
+            ) - temp > 0) {
                 no_of_person += -1
                 break;
             }
@@ -76,12 +76,12 @@ basic.forever(function () {
         DigitalPin.P8,
         PingUnit.Centimeters
         )
-        basic.pause(200)
+        basic.pause(150)
         if (sonar.ping(
         DigitalPin.P9,
         DigitalPin.P8,
         PingUnit.Centimeters
-        ) - temp2 < 2) {
+        ) - temp2 < 0) {
             no_of_person += 1
             break;
         } else {
@@ -89,7 +89,7 @@ basic.forever(function () {
             DigitalPin.P9,
             DigitalPin.P8,
             PingUnit.Centimeters
-            ) - temp2 > 2) {
+            ) - temp2 > 0) {
                 no_of_person += -1
                 break;
             }
