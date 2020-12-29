@@ -48,9 +48,6 @@ basic.forever(function () {
     if (no_of_person < 0) {
         no_of_person = 0
     }
-    if (no_of_person > 9) {
-        no_of_person = 9
-    }
     if (start_sending == 1) {
         bluetooth.uartWriteNumber(no_of_person)
     }
@@ -85,9 +82,6 @@ basic.forever(function () {
     }
     if (no_of_person < 0) {
         no_of_person = 0
-    }
-    if (no_of_person > 9) {
-        no_of_person = 9
     }
     if (start_sending == 1) {
         bluetooth.uartWriteNumber(no_of_person)
