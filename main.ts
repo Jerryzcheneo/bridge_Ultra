@@ -1,35 +1,19 @@
-bluetooth.onBluetoothConnected(function () {
-    start_sending = 1
-    basic.showIcon(IconNames.Yes)
-    basic.pause(200)
-})
-bluetooth.onBluetoothDisconnected(function () {
-    start_sending = 0
-    basic.showIcon(IconNames.No)
-    basic.pause(200)
-})
-let temp4 = 0
-let temp3 = 0
 let temp2 = 0
 let temp = 0
-let start_sending = 0
-basic.showString("S")
-basic.pause(200)
-bluetooth.startUartService()
 let no_of_person = 0
-start_sending = 0
+pins.digitalWritePin(DigitalPin.P0, 0)
 basic.forever(function () {
     while (sonar.ping(
     DigitalPin.P10,
     DigitalPin.P11,
     PingUnit.Centimeters
-    ) < 16) {
+    ) < 7) {
         temp = sonar.ping(
         DigitalPin.P10,
         DigitalPin.P11,
         PingUnit.Centimeters
         )
-        basic.pause(150)
+        basic.pause(400)
         temp2 = sonar.ping(
         DigitalPin.P10,
         DigitalPin.P11,
@@ -48,8 +32,10 @@ basic.forever(function () {
     if (no_of_person < 0) {
         no_of_person = 0
     }
-    if (start_sending == 1) {
-        bluetooth.uartWriteNumber(no_of_person)
+    if (no_of_person > 0) {
+        pins.digitalWritePin(DigitalPin.P0, 1)
+    } else {
+        pins.digitalWritePin(DigitalPin.P0, 0)
     }
     basic.showNumber(no_of_person)
 })
@@ -58,23 +44,23 @@ basic.forever(function () {
     DigitalPin.P9,
     DigitalPin.P8,
     PingUnit.Centimeters
-    ) < 16) {
-        temp3 = sonar.ping(
+    ) < 7) {
+        temp = sonar.ping(
         DigitalPin.P9,
         DigitalPin.P8,
         PingUnit.Centimeters
         )
-        basic.pause(150)
-        temp4 = sonar.ping(
+        basic.pause(400)
+        temp2 = sonar.ping(
         DigitalPin.P9,
         DigitalPin.P8,
         PingUnit.Centimeters
         )
-        if (temp4 - temp3 < 0) {
+        if (temp2 - temp < 0) {
             no_of_person += 1
             break;
         } else {
-            if (temp4 - temp3 > 0) {
+            if (temp2 - temp > 0) {
                 no_of_person += -1
                 break;
             }
@@ -83,8 +69,10 @@ basic.forever(function () {
     if (no_of_person < 0) {
         no_of_person = 0
     }
-    if (start_sending == 1) {
-        bluetooth.uartWriteNumber(no_of_person)
+    if (no_of_person > 0) {
+        pins.digitalWritePin(DigitalPin.P0, 1)
+    } else {
+        pins.digitalWritePin(DigitalPin.P0, 0)
     }
     basic.showNumber(no_of_person)
 })
